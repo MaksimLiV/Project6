@@ -58,7 +58,9 @@ class ViewController: UIViewController {
             view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "H:|[\(label)]|", options: [], metrics: nil, views: viewDictionary))
         }
         
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat:"V:|[label1(==80)]-[label2(==80)]-[label3(==88)]-[label4(==88)]-[label5(==88)]-(>=10)-|", options: [], metrics: nil, views: viewDictionary))
+        let metrics = ["labelHeight": 88]
+        
+        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat:"V:|[label1(labelHeight@999)]-[label2(label1)]-[label3(label1)]-[label4(label1)]-[label5(label1)]-(>=10)-|", options: [], metrics: metrics, views: viewDictionary))
         
     }
     
