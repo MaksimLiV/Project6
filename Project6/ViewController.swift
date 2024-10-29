@@ -52,32 +52,29 @@ class ViewController: UIViewController {
         view.addSubview(label4)
         view.addSubview(label5)
         
-        let viewDictionary = ["label1": label1, "label2": label2, "label3": label3, "label4": label4, "label5": label5]
+        let labelHeight = (view.frame.height / 5) - 2
         
-        
-        for label in viewDictionary.keys {
+        for (index, label) in [label1, label2, label3, label4, label5].enumerated() {
             
-            view.addConstraints([
-                NSLayoutConstraint(item: viewDictionary[label]!,
-                                   attribute: .leading,
-                                   relatedBy: .equal,
-                                   toItem: view.safeAreaLayoutGuide,
-                                   attribute: .leading,
-                                   multiplier: 1.0,
-                                   constant: 0),
-                NSLayoutConstraint(item: viewDictionary[label]!,
-                                   attribute: .trailing,
-                                   relatedBy: .equal,
-                                   toItem: view.safeAreaLayoutGuide,
-                                   attribute: .trailing,
-                                   multiplier: 1.0,
-                                   constant: 0)
+            NSLayoutConstraint.activate([
+                label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+                label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+                label.heightAnchor.constraint(equalToConstant: labelHeight)
             ])
+            
+            
+            if index == 0 {
+                label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
+            } else {
+                let previousLabel = [label1, label2, label3, label4, label5][index - 1]
+                label.topAnchor.constraint(equalTo: previousLabel.bottomAnchor, constant: 2).isActive = true
+            }
         }
         
-        let metrics = ["labelHeight": (view.frame.height / 5) - 2]
         
-        view.addConstraints(NSLayoutConstraint.constraints(withVisualFormat: "V:|[label1(labelHeight@999)]-[label2(labelHeight)]-[label3(labelHeight)]-[label4(labelHeight)]-[label5(labelHeight)]-(>=10)-|", options: [], metrics: metrics, views: viewDictionary))
+        if let lastLabel = [label1, label2, label3, label4, label5].last {
+            lastLabel.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
+        }
     }
     
 }
