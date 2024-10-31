@@ -54,27 +54,35 @@ class ViewController: UIViewController {
         
         let labelHeight = (view.frame.height / 5) - 2
         
-        for (index, label) in [label1, label2, label3, label4, label5].enumerated() {
+        NSLayoutConstraint.activate([
             
-            NSLayoutConstraint.activate([
-                label.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-                label.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-                label.heightAnchor.constraint(equalToConstant: labelHeight)
-            ])
+            label1.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            label1.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            label1.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             
             
-            if index == 0 {
-                label.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor).isActive = true
-            } else {
-                let previousLabel = [label1, label2, label3, label4, label5][index - 1]
-                label.topAnchor.constraint(equalTo: previousLabel.bottomAnchor, constant: 2).isActive = true
-            }
-        }
+            label2.topAnchor.constraint(equalTo: label1.bottomAnchor),
+            label2.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            label2.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            label2.heightAnchor.constraint(equalTo: label1.heightAnchor),
         
+            label3.topAnchor.constraint(equalTo: label2.bottomAnchor),
+            label3.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            label3.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            label3.heightAnchor.constraint(equalTo: label2.heightAnchor),
+            
+            label4.topAnchor.constraint(equalTo: label3.bottomAnchor),
+            label4.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            label4.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            label4.heightAnchor.constraint(equalTo: label3.heightAnchor),
+            
+            label5.topAnchor.constraint(equalTo: label4.bottomAnchor),
+            label5.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            label5.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            label5.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor),
+            label5.heightAnchor.constraint(equalTo: label4.heightAnchor)
+        ])
         
-        if let lastLabel = [label1, label2, label3, label4, label5].last {
-            lastLabel.bottomAnchor.constraint(lessThanOrEqualTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -10).isActive = true
-        }
     }
     
 }
